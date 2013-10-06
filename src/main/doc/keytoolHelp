@@ -1,0 +1,38 @@
+# Generate keystore with one keypair entry
+keytool -genkeypair -alias testcert -keyalg RSA -keysize 2048 -validity 365 -keystore serverkeystore.jks -storepass changeit -keypass changeit
+
+# Generate a thirt keypair entry for the root CA
+keytool -genkeypair -alias testrootca -keyalg RSA -keysize 4096 -validity 730 -keystore cakeystore.jks -storepass changeit -keypass changeit
+What is your first and last name?
+  [Unknown]:  My Test Root CA
+What is the name of your organizational unit?
+  [Unknown]:  SysDev
+What is the name of your organization?
+  [Unknown]:  Knowit
+What is the name of your City or Locality?
+  [Unknown]:  Göteborg
+What is the name of your State or Province?
+  [Unknown]:  Västra Götalandsregionen
+What is the two-letter country code for this unit?
+  [Unknown]:  SE
+Is CN=My Test Root CA, OU=SysDev, O=Knowit, L=Göteborg, ST=Västra Götalandsregionen, C=SE correct?
+  [no]:  yes
+
+# Generate a certificate signing request
+keytool -certreq -alias testcert -keystore serverkeystore.jks -storepass changeit -keypass changeit -file testcert.csr
+
+# Sign certificate signing request with root ca
+keytool -gencert -keystore cakeystore.jks -storepass changeit -keypass changeit -alias testrootca -infile testcert.csr -outfile testcert_signed.crt
+
+# Export the root ca certificate (this step and the next step is important to be able to import the signed certificate in the step afterwards)
+keytool -exportcert -file rootca.crt -keystore cakeystore.jks -alias testrootca -storepass changeit
+
+# Import the root ca certificate into serverkeystore.jks
+keytool -importcert -file rootca.crt -keystore serverkeystore.jks -alias testrootca -storepass changeit
+
+# Import the signed certificate into keystore
+keytool -importcert -file testcert_signed.crt -keystore serverkeystore.jks -alias testcert -storepass changeit
+
+# Verify
+keytool -list -keystore serverkeystore.jks -storepass changeit -v
+
