@@ -20,15 +20,11 @@ public class RC4 {
 
         Cipher cipher = Cipher.getInstance("RC4");
 
-        byte[] key = Base64.decodeBase64(base64EncodedKey.getBytes());
-        SecretKey secretKey = new SecretKeySpec(key, "RC4");
+        SecretKey secretKey = null;// Skapa en nyckel med hjälp av base64EncodedKey
 
-        cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+        // Gör lite grejer hör för att kryptera input
 
-        byte[] bytes = cipher.doFinal(input.getBytes());
-
-        String encrypted = new String(Base64.encodeBase64(bytes));
-
+        String encrypted = null; // Ta bort
         System.out.println(encrypted);
 
         return encrypted;
@@ -37,15 +33,11 @@ public class RC4 {
     public String decrypt(String encrypted) throws Exception {
         Cipher cipher = Cipher.getInstance("RC4");
 
-        byte[] key = Base64.decodeBase64(base64EncodedKey.getBytes());
-        SecretKey secretKey = new SecretKeySpec(key, "RC4");
+        SecretKey secretKey = null;// Skapa en nyckel med hjälp av base64EncodedKey
 
-        cipher.init(Cipher.DECRYPT_MODE, secretKey);
+        // Gör lite saker här för att dekryptera
 
-        byte[] bytes = cipher.doFinal(Base64.decodeBase64(encrypted.getBytes()));
-
-        String decrypted = new String(bytes);
-
+        String decrypted = null; // Ta bort
         System.out.println(decrypted);
 
         return decrypted;

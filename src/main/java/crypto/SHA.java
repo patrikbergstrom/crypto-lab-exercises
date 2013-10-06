@@ -11,16 +11,8 @@ import java.security.NoSuchAlgorithmException;
 public class SHA {
 
     // Digest with SHA-512. First time with salt and then one thousand rounds. Make a base64-encoded string and return.
-    public static String digest(String salt, String input) throws NoSuchAlgorithmException {
+    public static String digest(String salt, String input) throws Exception {
 
-        MessageDigest sha = MessageDigest.getInstance("SHA-512");
-
-        byte[] digest = sha.digest((salt + input).getBytes());
-        for (int i = 0; i < 1000; i++) {
-            digest = sha.digest(digest);
-        }
-
-        String result = new String(Base64.encodeBase64(digest));
-        return result;
+        return null;
     }
 }

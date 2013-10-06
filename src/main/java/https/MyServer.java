@@ -35,7 +35,6 @@ public class MyServer {
         myServer.setUp();
     }
 
-
 	public void setUp() throws Exception {
 
         configureSslSocketConnector();

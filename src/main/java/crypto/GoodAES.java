@@ -18,19 +18,19 @@ public class GoodAES {
     private final Cipher cipher;
 
     public GoodAES() throws Exception {
-        cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+        cipher = Cipher.getInstance("sätt en sträng som ger AES med CBC chiffer-läge och PKCS5Padding");
     }
 
     public void initEncryptMode() throws InvalidKeyException {
         cipher.init(Cipher.ENCRYPT_MODE, secretKey);
     }
     public void initDecryptMode(byte[] initializationVector) throws Exception {
-        cipher.init(Cipher.DECRYPT_MODE, secretKey, new IvParameterSpec(initializationVector));
+        cipher.init(Cipher.DECRYPT_MODE, secretKey); // Här måste en tredje parameter läggas till som använder initializationVector
     }
 
     public AesEncryptResult encrypt(String input) throws Exception {
 
-        byte[] iv = cipher.getIV();
+        byte[] iv = new byte[0]; // Ersätt med något som ger en initialiserings-vektor
         byte[] bytes = cipher.doFinal(input.getBytes());
 
         String encrypted = new String(Base64.encodeBase64(bytes));

@@ -30,7 +30,8 @@ public class BadAES {
 
     public String encrypt(String input) throws Exception {
 
-        byte[] bytes = cipher.doFinal(input.getBytes());
+        /* Insert code here that encrypts the input */
+        byte[] bytes = new byte[0]; // remove
 
         String encrypted = new String(Base64.encodeBase64(bytes));
         System.out.println(encrypted);
@@ -39,7 +40,8 @@ public class BadAES {
     }
 
     public String decrypt(String encrypted) throws Exception {
-        byte[] bytes = cipher.doFinal(Base64.decodeBase64(encrypted.getBytes()));
+        /* Insert code which decrypts */
+        byte[] bytes = new byte[0]; // remove
 
         return new String(bytes);
     }

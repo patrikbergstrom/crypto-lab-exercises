@@ -28,14 +28,7 @@ public class RSA {
 
     public String encrypt(String input) throws Exception {
 
-//        Cipher cipher = Cipher.getInstance("RSA");
-
-        /*KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-        keyPairGenerator.initialize(2048);
-
-        KeyPair keyPair = keyPairGenerator.generateKeyPair();*/
-
-        cipher.init(Cipher.ENCRYPT_MODE, keyPair.getPublic());
+        // Initiera cipher för att kunna kryptera
 
         byte[] bytes = cipher.doFinal(input.getBytes());
 
@@ -46,7 +39,7 @@ public class RSA {
 
     public String decrypt(String encrypted) throws Exception {
 
-        cipher.init(Cipher.DECRYPT_MODE, keyPair.getPrivate());
+        // Initiera cipher för att kunna dekryptera
 
         byte[] encBytes = Base64.decodeBase64(encrypted.getBytes());
 
