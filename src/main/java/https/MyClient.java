@@ -8,6 +8,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.security.KeyStore;
 import java.security.SecureRandom;
+import java.security.cert.Certificate;
 
 public class MyClient {
 
@@ -46,5 +47,14 @@ public class MyClient {
 
         // Tips: SSLContext.getDefault()
         return 0;
+    }
+
+    public static Certificate[] getCertificateChain() throws Exception {
+
+        URL url = new URL("https://www.google.com");
+
+        // Sedan är det bara att fiska upp certifikat-kedjan :)
+
+        return null;
     }
 }
