@@ -12,6 +12,6 @@ public class SHATest {
 
         System.out.println(hash);
 
-        assertEquals("kIkHnURk5ebabDPwp97MSQe9yXLPwRgN0yYeycoTCRLnMR6LyPckFs1ASR59dnrp147m3JrNnTtI5v/R2FhD1w==", hash);
+        assertEquals("2SyaB4pESEZE4dKcXWcGGE5FSCXhlEDsO3TB1ij2N3ZHQaRH7/6tWEToNxU+9tlcWw5swCKXeUFwVsumGERTyg==", hash);
     }
 }

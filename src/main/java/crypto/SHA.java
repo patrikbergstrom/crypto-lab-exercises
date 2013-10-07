@@ -10,7 +10,7 @@ import java.security.NoSuchAlgorithmException;
  */
 public class SHA {
 
-    // Digest with SHA-512. First time with salt and then one thousand rounds. Make a base64-encoded string and return.
+    // Digest with SHA-512. Concatenate salt and input and then hash thousand rounds. Make a base64-encoded string and return.
     public static String digest(String salt, String input) throws Exception {
 
         return null;
