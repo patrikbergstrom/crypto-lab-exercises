@@ -28,13 +28,10 @@ public class PBE {
         Cipher cipher = Cipher.getInstance("PBEWithSHA256And256BitAES-CBC-BC");
 
         SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBEWithSHA256And256BitAES-CBC-BC");
-        SecretKey secretKey = keyFactory.generateSecret(keySpec);
 
-        AlgorithmParameterSpec spec = new PBEParameterSpec(theSalt.getBytes(), 1000);
+        /* Insert code here*/
 
-        cipher.init(Cipher.ENCRYPT_MODE, secretKey, spec);
-
-        byte[] bytes = cipher.doFinal(data.getBytes());
+        byte[] bytes = null; // Change this
 
         return new String(Base64.encodeBase64(bytes));
     }
@@ -46,13 +43,10 @@ public class PBE {
         Cipher cipher = Cipher.getInstance("PBEWithSHA256And256BitAES-CBC-BC");
 
         SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBEWithSHA256And256BitAES-CBC-BC");
-        SecretKey secretKey = keyFactory.generateSecret(keySpec);
 
-        AlgorithmParameterSpec spec = new PBEParameterSpec(theSalt.getBytes(), 1000);
+        /* Insert code here*/
 
-        cipher.init(Cipher.DECRYPT_MODE, secretKey, spec);
-
-        byte[] bytes = cipher.doFinal(Base64.decodeBase64(encrypted.getBytes()));
+        byte[] bytes = null; // Change this
 
         return new String(bytes);
     }
