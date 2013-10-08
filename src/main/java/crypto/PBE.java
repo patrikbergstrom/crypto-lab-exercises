@@ -18,27 +18,42 @@ import java.security.spec.AlgorithmParameterSpec;
 
 public class PBE {
 
-    public String encrypt(String data, String password) throws Exception{
+    private final String theSalt = "theSalt";
+
+    public String encrypt(String data, String password) throws Exception {
         Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
 
         PBEKeySpec keySpec = new PBEKeySpec(password.toCharArray());
 
         Cipher cipher = Cipher.getInstance("PBEWithSHA256And256BitAES-CBC-BC");
 
-//        KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
-//        keyGenerator.init(256);
-//        SecretKey secretKey = keyGenerator.generateKey();
-//        SecretKeySpec key = new SecretKeySpec(secretKey.getEncoded(), "PBEWithSHA256And256BitAES-CBC-BC");
         SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBEWithSHA256And256BitAES-CBC-BC");
         SecretKey secretKey = keyFactory.generateSecret(keySpec);
 
-        AlgorithmParameterSpec spec = new PBEParameterSpec("theSalt".getBytes(), 1000);
+        AlgorithmParameterSpec spec = new PBEParameterSpec(theSalt.getBytes(), 1000);
 
         cipher.init(Cipher.ENCRYPT_MODE, secretKey, spec);
 
         byte[] bytes = cipher.doFinal(data.getBytes());
 
-
         return new String(Base64.encodeBase64(bytes));
+    }
+
+    public String decrypt(String encrypted, String password) throws Exception {
+
+        PBEKeySpec keySpec = new PBEKeySpec(password.toCharArray());
+
+        Cipher cipher = Cipher.getInstance("PBEWithSHA256And256BitAES-CBC-BC");
+
+        SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBEWithSHA256And256BitAES-CBC-BC");
+        SecretKey secretKey = keyFactory.generateSecret(keySpec);
+
+        AlgorithmParameterSpec spec = new PBEParameterSpec(theSalt.getBytes(), 1000);
+
+        cipher.init(Cipher.DECRYPT_MODE, secretKey, spec);
+
+        byte[] bytes = cipher.doFinal(Base64.decodeBase64(encrypted.getBytes()));
+
+        return new String(bytes);
     }
 }

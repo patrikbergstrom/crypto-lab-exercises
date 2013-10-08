@@ -1,7 +1,6 @@
 package crypto;
 
 import org.apache.commons.codec.binary.Base64;
-import sun.misc.BASE64Encoder;
 
 import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;

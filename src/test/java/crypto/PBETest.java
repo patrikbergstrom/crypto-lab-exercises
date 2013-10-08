@@ -2,12 +2,19 @@ package crypto;
 
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 public class PBETest {
 
     @Test
-    public void testEncrypt() throws Exception {
+    public void testEncryptAndDecrypt() throws Exception {
         PBE pbe = new PBE();
 
-        pbe.encrypt("hemlig data", "secret");
+        String data = "hemlig data";
+        String encrypted = pbe.encrypt(data, "secret");
+
+        String decrypted = pbe.decrypt(encrypted, "secret");
+
+        assertEquals(data, decrypted);
     }
 }
